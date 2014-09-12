@@ -2,13 +2,16 @@
 using System.Linq;
 using System.Web.Http;
 using System.Web.OData;
+using System.Web.OData.Routing;
 using OData4.Models;
 
 namespace OData4.Controllers
 {
-    public class CoursesController:ODataController
+    [ODataRoutePrefix("Courses")]
+    public class CoursesODataController:ODataController
     {
         [EnableQuery]
+        [ODataRoute]
         public IHttpActionResult Get()
         {
             var courses = GetCourses();

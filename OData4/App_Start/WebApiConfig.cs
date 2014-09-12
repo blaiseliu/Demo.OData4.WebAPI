@@ -19,13 +19,15 @@ namespace OData4
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            config.MapODataServiceRoute("odata", "odata/v1", model: GetModel()); 
+            config.MapODataServiceRoute("odata", "odata", model: GetModel()); 
         }
+
+
 
         private static IEdmModel GetModel()
         {
             var builder = new ODataConventionModelBuilder();
-            builder.EntitySet<CourseViewModel>("Courses");
+            builder.EntitySet<CourseViewModel>("Courses").EntityType.HasKey(x => x.Id);
             return builder.GetEdmModel();
         }
     }
