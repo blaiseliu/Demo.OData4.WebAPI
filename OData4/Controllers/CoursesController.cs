@@ -15,16 +15,16 @@ namespace OData4.Controllers
             return Ok(courses);
         }
 
-        private static IEnumerable<CourseViewModel> GetCourses()
+        private static IQueryable<CourseViewModel> GetCourses()
         {
             var locations = new[] {"School", "Office Meeting Room", "Auditorium"};
             var instructors = new[] {"Charlie Brown", "Linus van Pelt", "Lucy van Pelt"};
 
 
-            return (from l in locations 
-                    from i in instructors 
-                    select new CourseViewModel(l, i))
-                    .ToList();
+            return (from l in locations
+                from i in instructors
+                select new CourseViewModel(l, i))
+                .AsQueryable();
         }
     }
 }

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.OData.Builder;
 using System.Web.OData.Extensions;
+using Microsoft.OData.Edm;
 using OData4.Models;
+using RouteParameter = System.Web.Http.RouteParameter;
 
 namespace OData4
 {
@@ -20,15 +19,13 @@ namespace OData4
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            config.MapODataServiceRoute("odata", "odata", model: GetModel()); 
+            config.MapODataServiceRoute("odata", "odata/v1", model: GetModel()); 
         }
 
-        private static Microsoft.OData.Edm.IEdmModel GetModel()
+        private static IEdmModel GetModel()
         {
             var builder = new ODataConventionModelBuilder();
             builder.EntitySet<CourseViewModel>("Courses");
-            //EntitySetConfiguration<CourseViewModel> courses = builder.EntitySet<CourseViewModel>("Courses");
-
             return builder.GetEdmModel();
         }
     }
